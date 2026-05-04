@@ -1,0 +1,334 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --light-blue: #6b8fd4;
+    --navy: #1a5291;
+    --white: #ffffff;
+    --crimson: #b22a2a;
+    --charcoal: #3d3d3d;
+    --bg: #f4f7fc;
+    --bg-alt: #eaf0f9;
+    --text-primary: #0d1a2e;
+    --text-secondary: #3d3d3d;
+    --text-muted: #6b7d9a;
+    --border: rgba(26,82,145,0.15);
+    --divider: rgba(26,82,145,0.1);
+    --navy-light: rgba(26,82,145,0.07);
+    --shadow: 0 2px 12px rgba(26,82,145,0.08);
+  }
+
+  .flyer-root {
+    font-family: 'Open Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 24px;
+    background: var(--navy);
+    border-bottom: 3px solid var(--crimson);
+  }
+  .logo-img { height: 38px; width: auto; display: block; }
+  .logo-fallback { display: flex; align-items: center; gap: 8px; }
+  .logo-mark { background: var(--white); color: var(--navy); font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 15px; padding: 6px 10px; border-radius: 5px; }
+  .logo-name { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: var(--white); }
+  .logo-name span { color: var(--light-blue); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 48px 40px 40px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-accent { position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(180deg, var(--navy) 0%, var(--crimson) 100%); }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 90% 50%, rgba(107,143,212,0.07) 0%, transparent 60%); pointer-events: none; }
+  .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; }
+  .hero-headline { font-family: 'Montserrat', sans-serif; font-size: clamp(24px, 4vw, 34px); font-weight: 800; line-height: 1.22; color: var(--text-primary); margin: 0 0 18px; }
+  .hero-headline em { color: var(--navy); font-style: normal; }
+  .hero-sub { font-size: clamp(14px, 2vw, 15px); color: var(--text-secondary); line-height: 1.8; font-weight: 400; }
+
+  /* ── STATS: 4-col desktop, 2-col tablet+mobile ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-cell { background: var(--navy); padding: 22px 12px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
+  .stat-cell:last-child { border-right: none; }
+  .stat-num { font-family: 'Montserrat', sans-serif; font-size: clamp(22px, 3.5vw, 30px); font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-size: clamp(10px, 1.5vw, 11px); color: rgba(255,255,255,0.6); font-weight: 400; line-height: 1.4; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 40px; background: var(--bg); }
+  .section-alt { background: var(--white); }
+  .section-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--crimson); margin-bottom: 6px; }
+  .section-headline { font-family: 'Montserrat', sans-serif; font-size: clamp(17px, 2.5vw, 21px); font-weight: 800; color: var(--text-primary); margin-bottom: 24px; line-height: 1.3; }
+  .section-headline em { color: var(--navy); font-style: normal; }
+
+  /* ── WIN + PREF CARDS: 2-col on desktop+tablet, 1-col on mobile ── */
+  .win-grid, .pref-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .win-card { background: var(--white); border: 1px solid var(--border); border-left: 3px solid var(--navy); border-radius: 6px; padding: 20px; display: flex; gap: 14px; align-items: flex-start; box-shadow: var(--shadow); }
+  .win-icon { width: 36px; height: 36px; min-width: 36px; border-radius: 6px; background: var(--navy-light); border: 1px solid rgba(26,82,145,0.2); display: flex; align-items: center; justify-content: center; }
+  .win-icon svg { width: 17px; height: 17px; }
+  .win-title { font-family: 'Montserrat', sans-serif; font-size: clamp(12px, 1.8vw, 13.5px); font-weight: 700; color: var(--text-primary); margin-bottom: 5px; line-height: 1.3; }
+  .win-body { font-size: clamp(12px, 1.6vw, 13px); color: var(--text-muted); line-height: 1.65; font-weight: 400; }
+
+  .pref-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 18px 20px; display: flex; gap: 12px; align-items: flex-start; box-shadow: var(--shadow); }
+  .pref-dot { width: 8px; height: 8px; min-width: 8px; border-radius: 2px; background: var(--crimson); margin-top: 6px; }
+  .pref-title { font-family: 'Montserrat', sans-serif; font-size: clamp(12px, 1.8vw, 13.5px); font-weight: 700; color: var(--text-primary); margin-bottom: 4px; line-height: 1.3; }
+  .pref-body { font-size: clamp(12px, 1.6vw, 13px); color: var(--text-muted); line-height: 1.6; font-weight: 400; }
+
+  .divider { height: 1px; background: var(--border); margin: 0 40px; }
+
+  /* ── NYT BLOCK ── */
+  .nyt-block { padding: 40px; background: var(--white); }
+  .nyt-block-label { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--crimson); margin-bottom: 14px; }
+  .nyt-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; box-shadow: var(--shadow); }
+  .nyt-stat-cell { background: var(--bg); padding: 20px; border-right: 1px solid var(--border); }
+  .nyt-stat-cell:last-child { border-right: none; }
+  .nyt-stat-pre { font-size: 11px; color: var(--text-muted); font-weight: 400; margin-bottom: 5px; }
+  .nyt-stat-num { font-family: 'Montserrat', sans-serif; font-size: clamp(22px, 3vw, 28px); font-weight: 800; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+  .nyt-stat-sub { font-size: 11.5px; color: var(--text-muted); font-weight: 400; line-height: 1.4; }
+  .nyt-source { margin-top: 10px; font-size: 11px; color: var(--text-muted); }
+  .nyt-source a { color: var(--light-blue); text-decoration: none; border-bottom: 0.5px solid var(--light-blue); }
+
+  /* ── CTA ── */
+  .cta-wrap { padding: 0 40px 40px; background: var(--bg); }
+  .cta-block { border-radius: 8px; background: var(--navy); padding: 38px 40px; display: flex; align-items: center; justify-content: space-between; gap: 28px; position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(26,82,145,0.2); }
+  .cta-bottom-accent { position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: var(--crimson); }
+  .cta-headline { font-family: 'Montserrat', sans-serif; font-size: clamp(18px, 2.5vw, 22px); font-weight: 800; color: var(--white); margin-bottom: 10px; line-height: 1.3; }
+  .cta-sub { font-size: clamp(13px, 1.8vw, 14px); color: rgba(255,255,255,0.65); font-weight: 400; line-height: 1.7; max-width: 380px; }
+  .cta-right { flex-shrink: 0; }
+  .cta-btn { background: var(--crimson); color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; padding: 15px 32px; border-radius: 5px; white-space: nowrap; letter-spacing: 0.8px; text-decoration: none; display: inline-block; text-transform: uppercase; }
+
+  /* ── FOOTER ── */
+  .footer-bar { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 14px 24px; background: var(--charcoal); border-top: 3px solid var(--navy); }
+  .footer-item { font-size: 13px; color: rgba(255,255,255,0.6); }
+  .footer-item a { color: var(--light-blue); text-decoration: none; }
+  .footer-sep { color: rgba(255,255,255,0.25); font-size: 16px; }
+
+  /* ── TABLET (≤768px): stats 2-col, cards stay 2-col ── */
+  @media (max-width: 768px) {
+    .hero { padding: 36px 24px 32px; }
+    .section, .nyt-block { padding: 30px 24px; }
+    .cta-wrap { padding: 0 24px 32px; }
+    .divider { margin: 0 24px; }
+
+    /* Stats: 2-col on tablet */
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .stat-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .stat-cell:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.1); }
+    .stat-cell:nth-last-child(-n+2) { border-bottom: none; }
+
+    /* Cards stay 2-col on tablet */
+    .win-grid, .pref-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+    /* NYT stays 3-col on tablet */
+    .nyt-stats-row { grid-template-columns: repeat(3, 1fr); }
+
+    /* CTA stacks on tablet */
+    .cta-block { flex-direction: column; align-items: flex-start; padding: 28px 24px; gap: 20px; }
+    .cta-right { width: 100%; }
+    .cta-btn { width: 100%; text-align: center; display: block; }
+  }
+
+  /* ── MOBILE (≤480px): cards go 1-col, NYT stacks ── */
+  @media (max-width: 480px) {
+    .hero-headline { font-size: 22px; }
+    .hero-sub { font-size: 13.5px; }
+    .stat-num { font-size: 26px; }
+    .section-headline { font-size: 17px; }
+
+    /* Cards: 1-col on mobile */
+    .win-grid, .pref-grid { grid-template-columns: 1fr; }
+
+    /* NYT: stacks on mobile */
+    .nyt-stats-row { grid-template-columns: 1fr; }
+    .nyt-stat-cell { border-right: none; border-bottom: 1px solid var(--border); }
+    .nyt-stat-cell:last-child { border-bottom: none; }
+
+    .footer-bar { flex-direction: column; gap: 6px; }
+    .footer-sep { display: none; }
+  }
+</style>
+
+<div class="flyer-root">
+
+  <div class="header-bar">
+    <img class="logo-img"
+      src="https://collectionpro.com/wp-content/uploads/2025/05/Logo_300.png"
+      onerror="this.style.display='none'; document.getElementById('lf').style.display='flex';"
+      alt="CollectionPro" />
+    <div class="logo-fallback" id="lf">
+      <div class="logo-mark">CP</div>
+      <div class="logo-name">Collection<span>Pro</span></div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-accent"></div>
+    <div class="hero-bg"></div>
+    <div class="hero-eyebrow">Maximize Your Reimbursements</div>
+    <h1 class="hero-headline">Gain <em>maximum dollars</em> from breast surgeries under the No Surprises Act (NSA).</h1>
+    <p class="hero-sub">CollectionPro is the only revenue recovery partner that combines 10,000+ Independent Dispute Resolution (IDR) wins, CMS data-sourced fee benchmarking intelligence, and zero upfront cost, built exclusively for breast surgeons who want to earn what they truly deserve.</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-cell">
+      <div class="stat-num">20x</div>
+      <div class="stat-label">Max reimbursement<br>vs. QPA achieved</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">10K+</div>
+      <div class="stat-label">IDR wins<br>to date</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">92%</div>
+      <div class="stat-label">Arbitration<br>success rate</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">$0</div>
+      <div class="stat-label">Upfront cost<br>to your practice</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-eyebrow">Our Edge</div>
+    <div class="section-headline">Why CollectionPro's <em>Win Rate Is 92%</em></div>
+    <div class="win-grid">
+      <div class="win-card">
+        <div class="win-icon">
+          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#1a5291" stroke-width="1.2"/><path d="M5 8.5l2 2 4-4" stroke="#1a5291" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="win-title">In-House IDR/NSA Specialists</div>
+          <div class="win-body">Full-time IDR experts with 10,000+ wins behind them. No outsourcing, no generalists. Dedicated arbitration professionals who live and breathe the NSA.</div>
+        </div>
+      </div>
+      <div class="win-card">
+        <div class="win-icon">
+          <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#1a5291" stroke-width="1.2"/><path d="M5 7h6M5 9.5h4" stroke="#1a5291" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="win-title">Industry-Leading Fee Intelligence</div>
+          <div class="win-body">Every claim is benchmarked against CMS data, at the national, regional, and local level, establishing the strongest possible proof for maximum reimbursement.</div>
+        </div>
+      </div>
+      <div class="win-card">
+        <div class="win-icon">
+          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#1a5291" stroke-width="1.2"/><path d="M8 2.5C8 2.5 5 5.5 5 8s3 5.5 3 5.5M8 2.5C8 2.5 11 5.5 11 8s-3 5.5-3 5.5M2.5 8h11" stroke="#1a5291" stroke-width="1.1" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="win-title">Multi-Payer and Multi-State Coverage</div>
+          <div class="win-body">Private and public insurance plans across all 50 states. Wherever your patients are insured, our team knows how to collect at full value.</div>
+        </div>
+      </div>
+      <div class="win-card">
+        <div class="win-icon">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4.5V8c0 3 2.5 5 5 5.5C11 13 13.5 11 13.5 8V4.5L8 2z" stroke="#1a5291" stroke-width="1.2" stroke-linejoin="round"/><path d="M5.5 8.5l1.5 1.5 3.5-3.5" stroke="#1a5291" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="win-title">Full Balance Billing Law Coverage</div>
+          <div class="win-body">Revenue recovery through both Federal and applicable State-level IDR arbitrations, ensuring comprehensive jurisdiction coverage so no dollar slips through the cracks.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section section-alt">
+    <div class="section-eyebrow">Surgeon Advantages</div>
+    <div class="section-headline">Why Breast Surgeons <em>Prefer CollectionPro</em></div>
+    <div class="pref-grid">
+      <div class="pref-card">
+        <div class="pref-dot"></div>
+        <div>
+          <div class="pref-title">No Risk, Zero Upfront Cost</div>
+          <div class="pref-body">We advance all IDR arbitration filing and administration fees on your behalf. Zero cost, zero risk to start recovering revenue today.</div>
+        </div>
+      </div>
+      <div class="pref-card">
+        <div class="pref-dot"></div>
+        <div>
+          <div class="pref-title">Highly Aged Claims Rescued</div>
+          <div class="pref-body">We re-open and re-file claims as old as 3 years. Underpaid and dormant A/R may fully be eligible for recovery.</div>
+        </div>
+      </div>
+      <div class="pref-card">
+        <div class="pref-dot"></div>
+        <div>
+          <div class="pref-title">As Low As 10% Success-Based Fee</div>
+          <div class="pref-body">Simple, predictable pricing, payable only after a favorable judgment. You keep 90 cents of every dollar we recover for you.</div>
+        </div>
+      </div>
+      <div class="pref-card">
+        <div class="pref-dot"></div>
+        <div>
+          <div class="pref-title">Tailored, Transparent Reporting</div>
+          <div class="pref-body">Custom dashboards keep you informed at every step. Know exactly where every claim stands, every single day.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="nyt-block">
+    <div class="nyt-block-label">Public reference of a plastic surgeon leveraging the No Surprises Act (NSA)</div>
+    <div class="nyt-stats-row">
+      <div class="nyt-stat-cell">
+        <div class="nyt-stat-pre">Before the law</div>
+        <div class="nyt-stat-num">$30k</div>
+        <div class="nyt-stat-sub">max per surgery</div>
+      </div>
+      <div class="nyt-stat-cell">
+        <div class="nyt-stat-pre">After arbitration</div>
+        <div class="nyt-stat-num">$440k</div>
+        <div class="nyt-stat-sub">per surgery (2025)</div>
+      </div>
+      <div class="nyt-stat-cell">
+        <div class="nyt-stat-pre">Price increase</div>
+        <div class="nyt-stat-num">~18x</div>
+        <div class="nyt-stat-sub">vs listed website price</div>
+      </div>
+    </div>
+    <div class="nyt-source">Source: <a href="https://www.nytimes.com/2026/04/22/health/breast-reduction-no-surprises-act-arbitration.html" target="_blank">NY Times article dated 04/22/2026</a></div>
+  </div>
+
+  <div class="cta-wrap">
+    <div class="cta-block">
+      <div class="cta-bottom-accent"></div>
+      <div class="cta-left">
+        <div class="cta-headline">Partner with CollectionPro.<br>Your revenue, maximized.</div>
+        <div class="cta-sub">Join breast surgeons across the US who are unlocking the full power of the NSA. No risk. No upfront fees. Just results.</div>
+      </div>
+      <div class="cta-right">
+        <a class="cta-btn" href="https://collectionpro.com" target="_blank">Partner With Us</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-item"><a href="https://collectionpro.com" target="_blank">collectionpro.com</a></div>
+    <div class="footer-sep">|</div>
+    <div class="footer-item">(212) 243-3516</div>
+  </div>
+
+</div>
